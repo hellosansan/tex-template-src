@@ -3,8 +3,7 @@
 % TODO: 让 \endnote 的标记使用黑体数字
 % TODO: 让 \endnote 命令可以用于 \title 之中
 % TODO: 让 \tdoc 与 \tpart 在目录中可以显示页码范围
-% TODO: 修复 \editornote
-% TODO: \authornote 与 \editornote 之间的垂直间距可能需要微调
+% TODO: \nauthor 与 \neditor 之间的垂直间距可能需要微调
 
 \documentclass[
   zihao=5,
@@ -16,10 +15,6 @@
 % ------------------------------------------------------------------------------
 % 导言区
 % ------------------------------------------------------------------------------
-
-% ----------------------------------------------------------
-% 宏包加载
-% ----------------------------------------------------------
 
 \usepackage{bigfoot}
 \usepackage{calc}
@@ -40,6 +35,7 @@
 \usepackage{truncate}
 \usepackage{ulem}
 \usepackage{xcolor}
+\usepackage{xparse}
 \usepackage{xunicode-addon}
 
 \raggedbottom
@@ -49,9 +45,9 @@
 \xeCJKsetup{underdot/symbol={\raisebox{-5pt}{◦}}}
 \newcommand{\dotemph}[1]{\CJKunderdot{#1}}
 
-% ----------------------------------------------------------
+% --------------------------------------
 % 字体定义
-% ----------------------------------------------------------
+% --------------------------------------
 
 \setCJKmainfont{FZShuSong}
 [
@@ -100,9 +96,9 @@ FakeStretch=0.95]
   middle-margin-ratio = 0.000,
 }
 
-% ----------------------------------------------------------
+% --------------------------------------
 % 版面与边距
-% ----------------------------------------------------------
+% --------------------------------------
 
 \geometry{
   paperwidth  = 437bp,
@@ -116,17 +112,15 @@ FakeStretch=0.95]
   footnotesep = 11bp,
 }
 
-% ----------------------------------------------------------
+% --------------------------------------
 % 页眉、页脚与页码
-% ----------------------------------------------------------
+% --------------------------------------
 
 \pagestyle{fancy}
 
 \fancyhf{}
 
-% --------------------------------------
 % 页眉与页脚
-% --------------------------------------
 
 \renewcommand{\headrulewidth}{0bp}
 
@@ -153,9 +147,7 @@ FakeStretch=0.95]
   \markright{\theheadermark}%
 }
 
-% --------------------------------------
 % 页码
-% --------------------------------------
 
 \fancyfoot[RO]{\fontspec{Berthold Baskerville Book}[Path=fonts/]\thepage}
 \fancyfoot[LE]{\fontspec{Berthold Baskerville Book}[Path=fonts/]\thepage}
@@ -177,142 +169,14 @@ FakeStretch=0.95]
   \fancyfoot[LE]{\fontspec{Berthold Baskerville Book}[Path=fonts/]\thepage}%
 }
 
-% ----------------------------------------------------------
-% 注释
-% ----------------------------------------------------------
-
-\AtBeginUTFCommand[\textcircled]{\begroup\EnclosedNumbers}
-\AtEndUTFCommand[\textcircled]{\endgroup}
-
-\xeCJKDeclareCharClass{Default}{"24EA, "2460->"2473, "3251->"32BF}
-\newfontfamily\EnclosedNumbers{FZShuSong}[Path=fonts/]
-
-\makeatletter
-
-\setlength{\skip\footins}{2\baselineskip plus 2\baselineskip minus
-2\baselineskip}
-
 % --------------------------------------
-% authornote
+%  命令导入
 % --------------------------------------
 
-\DeclareNewFootnote{B}
-
-\newcommand\defaultfootnoterule{\vskip 8.0bp\hrule width 74bp height
-0.3bp\vskip 8.0bp}
-
-\let\fn@footnoteB\thefootnoteB
-\let\fn@fnfootnoteB\footnoteB
-
-\renewcommand{\thefootnoteB}{%
-  \CJKfamily{fs}%
-  \fontsize{8.0bp}{8.0bp}\selectfont%
-  （\fn@footnoteB）%
-}
-
-\newcommand{\authornote}[1]{%
-  \deffootnote[5em]{0em}{0em}{%
-    \raisebox{0.3bp}{%
-      \thefootnotemark\hspace{0.5em}%
-    }%
-  }%
-  \fn@fnfootnoteB{%
-    \CJKfamily{fs}%
-    \fontsize{9.0bp}{9.5bp}\selectfont%
-    #1%
-  }%
-  \hspace{-0.2em}%
-}
-
-% --------------------------------------
-% editornote
-% --------------------------------------
-
-\DeclareNewFootnote{C}
-
-\renewcommand\extrafootnoterule{\vskip -4.0bp\hrule width \textwidth
-height 0.3bp\vskip 8.0bp}
-
-\let\fn@fnfootnoteC\footnoteC
-
-\renewcommand\thefootnoteC{%
-  \textcircled{%
-    \arabic{footnoteC}%
-  }%
-}
-
-\newcommand{\editornote}[1]{%
-  \hspace{0.1em}%
-  \deffootnote{2em}{0em}{%
-    \raisebox{0.4bp}{%
-      \makebox[2em][l]{\thefootnotemark}%
-    }%
-  }%
-  \fn@fnfootnoteC{%
-    \CJKfamily{fs}%
-    \fontsize{9.0bp}{9.5bp}\selectfont%
-    #1%
-  }%
-}
-
-\MakePerPage{footnoteC}
-
-\makeatother
-
-% --------------------------------------
-% endnote
-% --------------------------------------
-
-\setenotez{
-  list-heading=
-  \chapter*{\CJKfamily{kt}\fontsize{16.5bp}{16.5bp}\selectfont\ziju{1.500}{注释}},
-  backref=true
-}
-
-\renewcommand\enmark[1]{%
-  {\CJKfamily{ss}\fontsize{9.0bp}{9.75bp}\selectfont #1}\hspace{1em}%
-}
-
-\let\originalendnote\endnote
-
-\renewcommand{\endnote}[1]{%
-  \hspace{0.05em}%
-  \originalendnote{%
-    \begingroup
-    \leftskip=2.9em\relax%
-    \rightskip=0.1em\relax%
-    \CJKfamily{ss}%
-    \fontsize{9.0bp}{9.75bp}\selectfont%
-    \ziju{0.050}%
-    #1%
-    \par%
-    \endgroup%
-    \vspace{-0.6em}%
-  }%
-  \hspace{-0.05em}%
-}
-
-\fancypagestyle{endnotestyle}{%
-  \fancyhf{}%
-  \renewcommand{\headrulewidth}{0bp}%
-
-  \fancyhead[RO]{\small\CJKfamily{xh}\scalebox{0.9}[1.0]{\ziju{1.5pt}{注释}}}
-  \fancyhead[LE]{\small\CJKfamily{xh}\scalebox{0.9}[1.0]{\ziju{1.5pt}{注释}}}
-
-  \fancyfoot[RO]{%
-    \makebox[0pt][l]{%
-      \hspace{3.5bp}%
-      \fontspec{Berthold Baskerville Book}[Path=fonts/]\thepage
-    }%
-  }
-  \fancyfoot[LE]{\hspace{-4.5bp}\makebox[0pt][r]{\fontspec{Berthold
-  Baskerville Book}[Path=fonts/]\thepage}}
-}
-
-% --------------------------------------
-
-\input{commands}
-\input{titles}
+\input{note_cmd}
+\input{title_cmd}
+\input{other_cmd}
+\input{personal_cmd}
 
 % ------------------------------------------------------------------------------
 % 正文
@@ -322,7 +186,7 @@ height 0.3bp\vskip 8.0bp}
 
 % --------------------------------------
 
-\input{../cover}
+\input{tests/cover}
 
 % --------------------------------------
 
@@ -370,7 +234,7 @@ Baskerville Book}[Path=fonts/]\thepage}}
 
 % --------------------------------------
 
-\input{../content}
+\input{tests/content}
 
 % --------------------------------------
 

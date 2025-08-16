@@ -1,7 +1,3 @@
-% ----------------------------------------------------------
-% 目录与标题
-% ----------------------------------------------------------
-
 \ctexset{
   tocdepth    = 10,
   secnumdepth = 6,
@@ -12,6 +8,43 @@
   \fontsize{16.5bp}{16.5bp}\selectfont\ziju{1.500}%
   目录%
 }
+
+% --------------------------------------
+% intro
+% --------------------------------------
+
+\titleclass{\intro}{straight}[\part]
+
+\newcounter{intro}[part]
+\renewcommand\theintro{\hspace{-1em}}
+
+\titlecontents{intro}[0bp]%
+{%
+  \CJKfamily{fs}%
+  \fontsize{10.5bp}{10.5bp}\selectfont\ziju{0.050}%
+  \vspace{3bp}%
+}%
+{}%
+{}%
+{\hspace{3bp}\titlerule*[.4em]{$\cdot$}\contentspage}
+
+\newcommand\introbox{%
+  \centering%
+  \begin{minipage}{0.80\textwidth}%
+    \modifiedmodifiedxb%
+    \fontsize{16.5bp}{18.0bp}\selectfont\ziju{0.050}%
+    \centering%
+  }
+
+  \titleformat{\intro}[display]%
+  {\introbox}{}{0bp}%
+  {}[%
+\end{minipage}]
+
+\titlespacing{\intro}%
+{0bp}%
+{0bp}%
+{18.0bp}%
 
 % --------------------------------------
 % part
@@ -89,43 +122,6 @@
   chapter / afterskip  = ,
   chapter / beforeskip = ,
 }
-
-% --------------------------------------
-% chapterx
-% --------------------------------------
-
-\titleclass{\chapterx}{straight}[\part]
-
-\newcounter{chapterx}[part]
-\renewcommand\thechapterx{\hspace{-1em}}
-
-\titlecontents{chapterx}[0bp]%
-{%
-  \CJKfamily{fs}%
-  \fontsize{10.5bp}{10.5bp}\selectfont\ziju{0.050}%
-  \vspace{3bp}%
-}%
-{}%
-{}%
-{\hspace{3bp}\titlerule*[.4em]{$\cdot$}\contentspage}
-
-\newcommand\chapterxbox{%
-  \centering%
-  \begin{minipage}{0.80\textwidth}%
-    \modifiedmodifiedxb%
-    \fontsize{16.5bp}{18.0bp}\selectfont\ziju{0.050}%
-    \centering%
-  }
-
-  \titleformat{\chapterx}[display]%
-  {\chapterxbox}{}{0bp}%
-  {}[%
-\end{minipage}]
-
-\titlespacing{\chapterx}%
-{0bp}%
-{0bp}%
-{18.0bp}%
 
 % --------------------------------------
 % section
@@ -350,22 +346,32 @@
 {-1bp}%
 
 % ------------------------------------------------------------------------------
-% 重命名
-%
-% \tyear          -> 年份标题 (可选)
-% \tdoc           -> 文献标题
-% \tpart          -> 篇 (可选)
-% \tchapter       -> 章
-% \tsection       -> 节 (如: 1.)
-% \tsubsection    -> 子节 (如: A.)
-% \tsubsubsection -> 小节 (如: (1))
+% \tintro                -> 前言     (可选)
+% \tyear                 -> 年份标题 (可选)
+% \tdoc                  -> 文献标题
+% \tpart                 -> 篇       (可选)
+% \tchapter(nonum)       -> 章
+% \tsection(nonum)       -> 节   (如: 1. )
+% \tsubsection(nonum)    -> 子节 (如: A. )
+% \tsubsubsection(nonum) -> 小节 (如: (1))
 % ------------------------------------------------------------------------------
+
+% tintro
+
+\newcommand{\tintro}[1]{%
+  \cleardoublepage%
+  \intro{#1}\label{#1}%
+}
+
+% tyear
 
 \newcommand{\tyear}[1]{%
   \cleardoublepage%
   \thispagestyle{empty}%
   \part{#1}\label{#1}%
 }
+
+% tdoc
 
 \newcommand{\tdoc}[1]{%
   \cleardoublepage%
@@ -375,6 +381,8 @@
   \chapter{#1}\label{#1}%
   \let\thispagestyle\oldthispagestyle%
 }
+
+% tpart
 
 \newcommand{\tpart}[1]{%
   \cleardoublepage%
@@ -388,6 +396,8 @@
   \partmark{#1}%
 }
 
+% tchapter
+
 \newcommand{\tchapter}[1]{%
   \clearpage%
   \subsection{#1}\label{#1}%
@@ -400,6 +410,22 @@
   \chaptermark{#1}%
 }
 
+% 为 chapter 添加副标题
+\newcommand{\tvicechapter}[1]{%
+  \vspace{-3.0bp}%
+  \begin{center}%
+    \begin{minipage}[t]{\textwidth}%
+      \CJKfamily{fs}%
+      \fontsize{10.5bp}{10.5bp}\selectfont\ziju{0.010}%
+      \centering%
+      #1
+    \end{minipage}%
+    \vspace{18.5bp}%
+  \end{center}%
+}
+
+% tsection
+
 \newcommand{\tsection}[1]{%
   \subsubsection{#1}\label{#1}%
 }
@@ -410,6 +436,8 @@
   \sectionmark{#1}%
 }
 
+% tsubsection
+
 \newcommand{\tsubsection}[1]{%
   \paragraph{#1}\label{#1}%
 }
@@ -418,6 +446,8 @@
   \paragraph*{#1}\label{#1}%
   \addcontentsline{toc}{paragraph}{#1}%
 }
+
+% tsubsubsection
 
 \newcommand{\tsubsubsection}[1]{%
   \subparagraph{#1}\label{#1}%

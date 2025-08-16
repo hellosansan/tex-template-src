@@ -1,0 +1,124 @@
+% important
+
+\newcommand{\important}[1]{
+  \textbf{#1}%
+}
+
+% underdot
+
+\newcommand{\underdot}[1]{
+  \CJKunderdot{#1}%
+}
+
+% hr
+% 添加一条水平分割线
+
+\newcommand{\hr}{%
+  \vspace{0.3em}%
+  {%
+    \centering%
+      *　　　　　*　　　　　*%
+    \par%
+  }%
+}
+
+% quote
+% 添加一段引言
+
+\renewenvironment{quote}
+{%
+  \list{}{\rightmargin=0pt \leftmargin=0pt}%
+\item[]\relax\vspace{0.2em}
+  \fontsize{9.0bp}{9.75bp}\selectfont
+  \hspace*{2em}%
+}
+{%
+  \vspace{-0.2em}\endlist
+}
+
+\newcommand{\quo}[1]{
+  \begin{quote}%
+    #1%
+  \end{quote}%
+}
+
+% closing
+% 添加落款信息
+
+\newcommand{\closing}[2]{%
+  \vspace{10.5bp}%
+  \begin{flushright}%
+    \CJKfamily{fs}%
+    \fontsize{9.0bp}{9.5bp}\selectfont\ziju{0.010}%
+    #1
+    \if\relax#2\relax%
+    \else%
+    \par#2%
+    \fi%
+  \end{flushright}%
+  \vspace{10.5bp}%
+}
+
+% info
+% 添加作者、出版及编辑等信息
+
+\newcommand{\info}[4]{%
+  \noindent
+  \begin{minipage}[t]{0.4\textwidth}
+    \begin{minipage}[t]{\textwidth}
+      \fontsize{9.0bp}{9.5bp}\selectfont\ziju{0.010}#1%
+    \end{minipage}
+
+    \rule{0pt}{0.6em}
+
+    \begin{minipage}[t]{\textwidth}
+      \fontsize{9.0bp}{9.5bp}\selectfont\ziju{0.010}#2%
+    \end{minipage}
+  \end{minipage}%
+  \hspace{0.2\textwidth}%
+  \begin{minipage}[t]{0.4\textwidth}
+    \begin{minipage}[t]{\textwidth}
+      \fontsize{9.0bp}{9.5bp}\selectfont\ziju{0.010}#3%
+    \end{minipage}
+
+    \rule{0pt}{0.6em}
+
+    \begin{minipage}[t]{\textwidth}
+      \fontsize{9.0bp}{9.5bp}\selectfont\ziju{0.010}#4%
+    \end{minipage}
+  \end{minipage}
+}
+
+% img
+% 在当前位置插入一张图像
+
+\NewDocumentCommand{\img}{O{1} m}{%
+  \par\vspace{\dimexpr\baselineskip - 1em\relax}%
+  \noindent%
+  \makebox[\textwidth][c]{%
+    \includegraphics[width=#1\textwidth]{#2}%
+  }%
+  \par\vspace{\dimexpr\baselineskip - 1.8em\relax}%
+}
+
+% todo
+% 在当前位置插入一个占位框
+
+\newcommand{\todo}{%
+  \par\vspace{12bp}%
+  \noindent%
+  \makebox[\textwidth][c]{%
+    \begin{tikzpicture}%
+      \node[%
+        draw,%
+        rectangle,%
+        line width=1pt,%
+        minimum height=5\baselineskip,%
+        text width=0.8\textwidth,%
+        align=center%
+      ]%
+      {这里应该添加一张图像或者一段文字};%
+    \end{tikzpicture}%
+  }%
+  \par\vspace{4bp}%
+}

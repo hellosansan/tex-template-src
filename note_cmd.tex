@@ -1,0 +1,124 @@
+% \AtBeginUTFCommand[\textcircled]{\begroup\EnclosedNumbers}
+% \AtEndUTFCommand[\textcircled]{\endgroup}
+
+\xeCJKDeclareCharClass{Default}{"24EA, "2460->"2473, "3251->"32BF}
+\newfontfamily\EnclosedNumbers{FZShuSong}[Path=fonts/]
+
+\makeatletter
+
+\setlength{\skip\footins}{2\baselineskip plus 2\baselineskip minus 2\baselineskip}
+
+% --------------------------------------
+% nauthor
+% --------------------------------------
+
+\DeclareNewFootnote{B}
+
+\newcommand\defaultfootnoterule{\vskip 8.0bp\hrule width 74bp height 0.3bp\vskip 8.0bp}
+
+\let\fn@footnoteB\thefootnoteB
+\let\fn@fnfootnoteB\footnoteB
+
+\renewcommand{\thefootnoteB}{%
+  \CJKfamily{fs}%
+  \fontsize{8.0bp}{8.0bp}\selectfont%
+  （\fn@footnoteB）%
+}
+
+\newcommand{\nauthor}[1]{%
+  \deffootnote[5em]{0em}{0em}{%
+    \raisebox{0.3bp}{%
+      \thefootnotemark\hspace{0.5em}%
+    }%
+  }%
+  \fn@fnfootnoteB{%
+    \CJKfamily{fs}%
+    \fontsize{9.0bp}{9.5bp}\selectfont%
+    #1%
+  }%
+  \hspace{-0.2em}%
+}
+
+% --------------------------------------
+% neditor
+% --------------------------------------
+
+\DeclareNewFootnote{C}
+
+\renewcommand\extrafootnoterule{\vskip -4.0bp\hrule width \textwidth height 0.3bp\vskip 8.0bp}
+
+\let\fn@fnfootnoteC\footnoteC
+
+\renewcommand\thefootnoteC{%
+  \EnclosedNumbers
+  \textcircled{%
+    \arabic{footnoteC}%
+  }%
+}
+
+\newcommand{\neditor}[1]{%
+  \hspace{0.02em}%
+  \deffootnote{2em}{0em}{%
+    \raisebox{0.4bp}{%
+      \makebox[2em][l]{\thefootnotemark}%
+    }%
+  }%
+  \fn@fnfootnoteC{%
+    \CJKfamily{fs}%
+    \fontsize{9.0bp}{9.5bp}\selectfont%
+    #1%
+  }%
+}
+
+\MakePerPage{footnoteC}
+
+\makeatother
+
+% --------------------------------------
+% nend
+% --------------------------------------
+
+\setenotez{
+  list-heading=
+  \chapter*{\CJKfamily{kt}\fontsize{16.5bp}{16.5bp}\selectfont\ziju{1.500}{注释}},
+  backref=true
+}
+
+\renewcommand\enmark[1]{%
+  {\CJKfamily{ss}\fontsize{9.0bp}{9.75bp}\selectfont #1}\hspace{1em}%
+}
+
+\let\originalendnote\endnote
+
+\newcommand{\nend}[1]{%
+  \hspace{0.05em}%
+  \originalendnote{%
+    \begingroup
+    \leftskip=2.9em\relax%
+    \rightskip=0.1em\relax%
+    \CJKfamily{ss}%
+    \fontsize{9.0bp}{9.75bp}\selectfont%
+    \ziju{0.050}%
+    #1%
+    \par%
+    \endgroup%
+    \vspace{-0.6em}%
+  }%
+  \hspace{-0.05em}%
+}
+
+\fancypagestyle{endnotestyle}{%
+  \fancyhf{}%
+  \renewcommand{\headrulewidth}{0bp}%
+
+  \fancyhead[RO]{\small\CJKfamily{xh}\scalebox{0.9}[1.0]{\ziju{1.5pt}{注释}}}
+  \fancyhead[LE]{\small\CJKfamily{xh}\scalebox{0.9}[1.0]{\ziju{1.5pt}{注释}}}
+
+  \fancyfoot[RO]{%
+    \makebox[0pt][l]{%
+      \hspace{3.5bp}%
+      \fontspec{Berthold Baskerville Book}[Path=fonts/]\thepage
+    }%
+  }
+  \fancyfoot[LE]{\hspace{-4.5bp}\makebox[0pt][r]{\fontspec{Berthold Baskerville Book}[Path=fonts/]\thepage}}
+}
