@@ -1,9 +1,11 @@
 %!TEX program = xelatex
 
-% TODO: 让 \endnote 的标记使用黑体数字
-% TODO: 让 \endnote 命令可以用于 \title 之中
-% TODO: 让 \tdoc 与 \tpart 在目录中可以显示页码范围
-% TODO: \nauthor 与 \neditor 之间的垂直间距可能需要微调
+% TODO: \nend 未使用正确的的字体
+% TODO: \nend 不可用于 \title 之中
+% TODO: \nend 存在重复条目
+% TODO: \tdoc 与 \tpart 暂未显示页码范围
+% TODO: \nauthor 与 \neditor 之间的垂直间距需要微调
+% TODO: 自动反向更新下游仓库
 
 \documentclass[
   zihao=5,
@@ -176,7 +178,6 @@ FakeStretch=0.95]
 \input{note_cmd}
 \input{title_cmd}
 \input{other_cmd}
-\input{personal_cmd}
 
 % ------------------------------------------------------------------------------
 % 正文
