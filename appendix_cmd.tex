@@ -1,0 +1,204 @@
+\newcommand{\faketoc}[1]{%
+	\chapter{#1}%
+}
+
+\makeatletter
+\newlength\toclength
+\setlength{\toclength}{\@pnumwidth}
+\makeatother
+
+% ------------------
+% part
+% ------------------
+
+\newcounter{fakepartCounter}[chapter]
+\setcounter{fakepartCounter}{0}
+
+\newcommand{\fakepart}[2][]{
+	\refstepcounter{fakepartCounter}
+	\vspace{10.0bp}
+	\noindent
+	{
+		\hfill
+		\begin{minipage}{0.60\textwidth}% ? (宽度)
+			\CJKfamily{xb}%
+			\fontsize{11.0bp}{11.0bp}\selectfont\ziju{0.150}%
+			\centering%
+			#2
+		\end{minipage}
+		\hfill
+	}
+	\vspace{10.0bp}
+	\par
+}
+
+% ------------------
+% chapter
+% ------------------
+
+\newcounter{fakechapterCounter}[fakepartCounter]
+\setcounter{fakechapterCounter}{0}
+
+\newcommand{\fakechapter}[2][]{
+	\refstepcounter{fakechapterCounter}
+	\begingroup
+	\setlength{\leftskip}{-1.7em}
+	\hangafter 1
+	\hangindent 5.2em
+	{
+		{
+			\CJKfamily{ss}%
+			\fontsize{9.0bp}{9.0bp}\selectfont\ziju{0.010}% ? (行距)
+			第\chinese{fakechapterCounter}篇\hspace{1.0em}#2
+		}
+    	\ifnum\pdfstrcmp{#1}{1}=0
+			\titlerule*[.4em]{$\cdot$}\makebox[\toclength][r]{\pageref{#2}}
+    	\fi
+	}
+	\par
+	\endgroup
+}
+
+% ------------------
+% section
+% ------------------
+
+\newcounter{fakesectionCounter}[fakechapterCounter]
+\setcounter{fakesectionCounter}{0}
+
+\newcommand{\fakesection}[2][]{
+	\refstepcounter{fakesectionCounter}
+	\begingroup
+	\setlength{\leftskip}{0.1em}
+	\hangafter 1
+	\hangindent 5.2em
+	{
+		{
+			\CJKfamily{ss}%
+			\fontsize{9.0bp}{9.0bp}\selectfont\ziju{0.010}% ? (行距)
+			第\chinese{fakesectionCounter}章\hspace{1.0em}#2
+		}
+    	\ifnum\pdfstrcmp{#1}{1}=0
+			\titlerule*[.4em]{$\cdot$}\makebox[\toclength][r]{\pageref{#2}}
+    	\fi
+	}
+	\par
+	\endgroup
+}
+
+% ------------------
+% subsection
+% ------------------
+
+\newcounter{fakesubsectionCounter}[fakesectionCounter]
+\setcounter{fakesubsectionCounter}{0}
+
+\newcommand{\fakesubsection}[2][]{
+	\refstepcounter{fakesubsectionCounter}
+	\begingroup
+	\setlength{\leftskip}{1.9em}
+	\hangafter 1
+	\hangindent 2.8em
+	{
+		{
+			\CJKfamily{ss}%
+			\fontsize{9.0bp}{9.0bp}\selectfont\ziju{0.010}% ? (行距)
+			\arabic{fakesubsectionCounter}．\hspace{0.0em}#2
+		}
+    	\ifnum\pdfstrcmp{#1}{1}=0
+			\titlerule*[.4em]{$\cdot$}\makebox[\toclength][r]{\pageref{#2}}
+    	\fi
+	}
+	\par
+	\endgroup
+}
+
+% ------------------
+% subsubsection
+% ------------------
+
+\newcounter{fakesubsubsectionCounter}[fakesubsectionCounter]
+\setcounter{fakesubsubsectionCounter}{0}
+
+\newcommand{\fakesubsubsection}[2][]{
+	\refstepcounter{fakesubsubsectionCounter}
+	\begingroup
+	\setlength{\leftskip}{3.7em}
+	\hangafter 1
+	\hangindent 2.8em
+	{
+		{
+			\CJKfamily{ss}%
+			\fontsize{9.0bp}{9.0bp}\selectfont\ziju{0.010}% ? (行距)
+			\Alph{fakesubsubsectionCounter}．\hspace{0.0em}#2
+		}
+    	\ifnum\pdfstrcmp{#1}{1}=0
+			\titlerule*[.4em]{$\cdot$}\makebox[\toclength][r]{\pageref{#2}}
+    	\fi
+	}
+	\par
+	\endgroup
+}
+
+% ------------------
+% paragraph
+% ------------------
+
+\newcounter{fakeparagraphCounter}[fakesubsubsectionCounter]
+\setcounter{fakeparagraphCounter}{0}
+
+\newcommand{\fakeparagraph}[2][]{
+	\refstepcounter{fakeparagraphCounter}
+	\begingroup
+	\setlength{\leftskip}{5.5em}
+	\hangafter 1
+	\hangindent 3.7em
+	{
+		{
+			\CJKfamily{ss}%
+			\fontsize{9.0bp}{9.0bp}\selectfont\ziju{0.010}% ? (行距)
+			(\arabic{fakeparagraphCounter})\hspace{1.0em}#2
+		}
+    	\ifnum\pdfstrcmp{#1}{1}=0
+			\titlerule*[.4em]{$\cdot$}\makebox[\toclength][r]{\pageref{#2}}
+    	\fi
+	}
+	\par
+	\endgroup
+}
+
+% ------------------
+% TOC
+% ------------------
+
+% 年份
+
+% 文档
+\newcommand{\tocdoc}[2][]{%
+	\fakepart[#1]{#2}%
+}
+
+% 篇、卷、册
+\newcommand{\tocpart}[2][]{%
+	\fakechapter[#1]{#2}%
+}
+
+% 章
+\newcommand{\tocchapter}[2][]{%
+	\fakesection[#1]{#2}%
+}
+
+% 节 (1.)
+\newcommand{\tocsection}[2][]{%
+	\fakesubsection[#1]{#2}%
+}
+
+% 子节 (A.)
+\newcommand{\tocsubsection}[2][]{%
+	\fakesubsubsection[#1]{#2}%
+}
+
+% 小节 ((1))
+\newcommand{\tocsubsubsection}[2][]{%
+	\fakeparagraph[#1]{#2}%
+}
