@@ -34,12 +34,12 @@
 \renewenvironment{quote}
 {%
   \list{}{\rightmargin=0pt \leftmargin=0pt}%
-\item[]\relax\vspace{0.2em}
-  \fontsize{9.0bp}{9.75bp}\selectfont
-  \hspace*{2em}%
-}
+    \item[]\relax\vspace{0.2em}%
+  \fontsize{9.0bp}{9.75bp}\selectfont%
+  \hspace*{2em}\parindent=2em\parskip=0pt%
+}%
 {%
-  \vspace{-0.2em}\endlist
+  \vspace{-0.15em}\endlist
 }
 
 \newcommand{\quo}[1]{
