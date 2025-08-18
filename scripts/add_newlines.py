@@ -3,8 +3,8 @@
 This script processes text files in two stages:
 1. It removes all existing blank lines (lines that are empty or contain only
    whitespace).
-2. It then inserts a new blank line after every two consecutive lines of
-   the remaining content.
+2. It then inserts a new blank line after every single line of the
+   remaining content.
 
 The files are modified in-place.
 
@@ -21,7 +21,7 @@ import os
 def process_file(file_path):
     """
     Reads a file, removes all blank lines, then adds a blank line
-    every two lines, and writes the result back to the file.
+    after every line, and writes the result back to the file.
 
     Args:
         file_path (str): The path to the file to process.
@@ -31,12 +31,9 @@ def process_file(file_path):
             lines = f.readlines()
 
         # Step 1: Remove all blank lines.
-        # A line is considered blank if it's empty after stripping whitespace.
         non_blank_lines = [line for line in lines if line.strip()]
 
-        # If there are no content lines, there's nothing more to do.
         if not non_blank_lines:
-            # If the original file was not empty, make it empty.
             if lines:
                 with open(file_path, "w", encoding="utf-8") as f:
                     f.write("")
@@ -45,22 +42,16 @@ def process_file(file_path):
                 print(f"No changes needed (already empty): {file_path}")
             return
 
-        # Step 2: Add a blank line every two lines.
+        # Step 2: Add a blank line after EVERY line.
         result_lines = []
         for i, line in enumerate(non_blank_lines):
-            # Append the current line (keeping its original newline character).
+            # Append the current content line.
             result_lines.append(line)
-            # Check if this is the second line in a pair (e.g., index 1, 3, 5).
-            # Also, ensure it's not the very last line of the file.
-            is_pair_end = (i + 1) % 2 == 0
+            # Add a blank line after it, unless it's the very last line.
             is_not_last_line = (i + 1) < len(non_blank_lines)
-
-            if is_pair_end and is_not_last_line:
-                # Add a blank line. We need to add the newline character manually.
+            if is_not_last_line:
                 result_lines.append("\n")
 
-        # Join the result and write it back to the file.
-        # We use ''.join() because each line already has its own newline.
         final_content = "".join(result_lines)
         original_content = "".join(lines)
 
@@ -82,7 +73,7 @@ def main():
     parser = argparse.ArgumentParser(
         description=(
             "Removes all blank lines from files, then adds one "
-            "blank line every two lines."
+            "blank line after every line."
         )
     )
     parser.add_argument(
@@ -92,7 +83,6 @@ def main():
     )
 
     args = parser.parse_args()
-
     file_list = glob.glob(args.path_pattern, recursive=True)
 
     if not file_list:
@@ -100,7 +90,6 @@ def main():
         return
 
     print(f"Found {len(file_list)} files. Starting processing...")
-
     for file_path in file_list:
         if os.path.isfile(file_path):
             process_file(file_path)
