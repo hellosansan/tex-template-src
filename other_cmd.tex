@@ -98,11 +98,19 @@
 % img
 % 在当前位置插入一张图像
 
-\NewDocumentCommand{\img}{O{1} m}{%
+\NewDocumentCommand{\img}{O{1} m O{}}{%
   \par\vspace{\dimexpr\baselineskip - 1em\relax}%
   \noindent%
   \makebox[\textwidth][c]{%
     \includegraphics[width=#1\textwidth]{#2}%
+  }%
+  \IfValueT{#3}{%
+    \par\vspace{-0.5em}%
+    {\begin{center}
+      \CJKfamily{ss}%
+      \fontsize{9.0bp}{9.5bp}\selectfont
+      \parbox{0.8\dimexpr#1\textwidth\relax}{\centering #3}
+    \end{center}}%
   }%
   \par\vspace{\dimexpr\baselineskip - 1.8em\relax}%
 }
