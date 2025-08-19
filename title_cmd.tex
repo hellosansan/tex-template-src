@@ -262,6 +262,15 @@
 % paragraph
 % --------------------------------------
 
+% \newlength{\paragraphhangindent}
+% \newcommand{\calculateparagraphhangindent}{%
+%   \settowidth{\paragraphhangindent}{%
+%     \CJKfamily{ss}\fontsize{12.5bp}{12.5bp}\selectfont\ziju{0.010}%
+%     （a）%
+%   }%
+% }
+% \calculateparagraphhangindent
+
 \titlecontents{paragraph}[6em]%
 {%
   \CJKfamily{ss}%
@@ -271,6 +280,19 @@
 {\contentspush{\thecontentslabel\hspace{1em}}}%
 {}%
 {\hspace{3bp}\titlerule*[.4em]{$\cdot$}\contentspage}
+
+% \newcommand\paragraphbox[1]{%
+%   \begin{center}%
+%     \begin{varwidth}{0.80\textwidth}%
+%       \modifiedmodifiedss%
+%       \fontsize{12.5bp}{12.5bp}\selectfont\ziju{0.010}%
+%       %  FIXME: 以下两行无效
+%       \hangindent=\paragraphhangindent%
+%       \hangafter=1%
+%       #1%
+%     \end{varwidth}%
+%   \end{center}%
+% }
 
 \newcommand\paragraphbox[1]{%
   \begin{center}%
@@ -284,7 +306,7 @@
 }
 
 \ctexset{
-  paragraph / name         = {\CJKfamily{ss}（,\CJKfamily{ss}）},
+  paragraph / name       = {\CJKfamily{ss}（,\CJKfamily{ss}）},
   paragraph / number     = \alph{paragraph},
   paragraph / format     = \paragraphbox,
   paragraph / aftername  = ,
