@@ -43,9 +43,12 @@
   \vspace{-0.15em}\endlist
 }
 
-\newcommand{\quo}[1]{
+\newcommand{\quo}[2][]{%
   \begin{quote}%
-    #1%
+    #2%
+    \ifthenelse{\isempty{#1}}{}{%
+      \par\noindent\raggedleft#1%
+    }%
   \end{quote}%
 }
 
