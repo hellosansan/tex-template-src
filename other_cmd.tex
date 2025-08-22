@@ -95,6 +95,10 @@
   \end{minipage}
 }
 
+% TODO:为 \img 与 \tbl 添加（可选的）：
+% 1. 递增的编号
+% 2. 随着章节递增的编号
+
 % img
 % 在当前位置插入一张图像
 
@@ -111,6 +115,27 @@
       \fontsize{9.0bp}{9.5bp}\selectfont
       \parbox{0.8\dimexpr#1\textwidth\relax}{\centering #3}
     \end{center}}%
+  }%
+  \par\vspace{\dimexpr\baselineskip - 1.8em\relax}%
+}
+
+
+% tbl
+% 在当前位置插入一张表格（标题在上）
+
+\NewDocumentCommand{\tbl}{O{1} m O{}}{%
+  \par\vspace{\dimexpr\baselineskip - 1em\relax}%
+  \IfValueT{#3}{%
+    {\begin{center}
+      \CJKfamily{ss}%
+      \fontsize{9.0bp}{9.5bp}\selectfont
+      \parbox{0.8\dimexpr#1\textwidth\relax}{\centering #3}
+    \end{center}}%
+    \par\vspace{-0.5em}%
+  }%
+  \noindent%
+  \makebox[\textwidth][c]{%
+    \includegraphics[width=#1\textwidth]{#2}%
   }%
   \par\vspace{\dimexpr\baselineskip - 1.8em\relax}%
 }
