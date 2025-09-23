@@ -53,7 +53,14 @@
 % 字体定义
 % --------------------------------------
 
-\setmainfont{Times New Roman}
+\setmainfont{Times New Roman}[
+  Path            = fonts/,
+  Extension       = .ttf,
+  UprightFont     = {*},
+  ItalicFont      = {* Italic},
+  BoldFont        = {* Bold},
+  BoldItalicFont  = {* Bold Italic}
+]
 
 \setCJKmainfont{FZShuSong}
 [
