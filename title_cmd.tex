@@ -400,7 +400,8 @@
   \thispagestyle{empty}%
   \let\oldthispagestyle\thispagestyle%
   \renewcommand{\thispagestyle}[1]{}%
-  \chapter{#1}\label{#1}%
+  \chapter*{#1}\label{#1}%
+  \addcontentsline{toc}{chapter}{#1}%
   \let\thispagestyle\oldthispagestyle%
 }
 
@@ -408,11 +409,13 @@
 
 \newcommand{\tpart}[1]{%
   \cleardoublepage%
+  \phantomsection%
   \section{#1}\label{#1}%
 }
 
 \newcommand{\tpartnonum}[1]{%
   \cleardoublepage%
+  \phantomsection%
   \section*{#1}\label{#1}%
   \addcontentsline{toc}{section}{#1}%
   \partmark{#1}%
@@ -422,11 +425,13 @@
 
 \newcommand{\tchapter}[1]{%
   \clearpage%
+  \phantomsection%
   \subsection{#1}\label{#1}%
 }
 
 \newcommand{\tchapternonum}[1]{%
   \clearpage%
+  \phantomsection%
   \subsection*{#1}\label{#1}%
   \addcontentsline{toc}{subsection}{#1}%
   \chaptermark{#1}%
@@ -449,22 +454,26 @@
 % tsection
 
 \newcommand{\tsection}[1]{%
+  \phantomsection%
   \subsubsection{#1}\label{#1}%
 }
 
 \newcommand{\tsectionnonum}[1]{%
+  \phantomsection%
   \subsubsection*{#1}\label{#1}%
-  \addcontentsline{to}{subsubsection}{#1}%
+  \addcontentsline{toc}{subsubsection}{#1}%
   \sectionmark{#1}%
 }
 
 % tsubsection
 
 \newcommand{\tsubsection}[1]{%
+  \phantomsection%
   \paragraph{#1}\label{#1}%
 }
 
 \newcommand{\tsubsectionnonum}[1]{%
+  \phantomsection%
   \paragraph*{#1}\label{#1}%
   \addcontentsline{toc}{paragraph}{#1}%
 }
@@ -472,10 +481,12 @@
 % tsubsubsection
 
 \newcommand{\tsubsubsection}[1]{%
+  \phantomsection%
   \subparagraph{#1}\label{#1}%
 }
 
 \newcommand{\tsubsubsectionnonum}[1]{%
+  \phantomsection%
   \subparagraph*{#1}\label{#1}%
   \addcontentsline{toc}{subparagraph}{#1}%
 }
