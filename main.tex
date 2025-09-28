@@ -256,7 +256,10 @@ Baskerville Book}[Path=fonts/]\thepage}}
 
 \printendnotes
 
-\addcontentsline{toc}{chapter}{注释}
+{%
+  \bookmarksetup{startatroot}
+  \addcontentsline{toc}{chapter}{注释}
+}
 
 % --------------------------------------
 
