@@ -1,3 +1,13 @@
+\newcommand{\setpartmark}[1]{%
+    \sbox{\headerbox}{\small\modifiedxh#1}%
+    \ifdim\wd\headerbox > 20em
+      \def\theheadermark{\truncate[……]{20em}{\small\modifiedxh #1}}%
+    \else
+      \def\theheadermark{\small\modifiedxh #1}%
+    \fi
+    \markright{\theheadermark}%
+}
+
 \ctexset{
   tocdepth    = 10,
   secnumdepth = 6,
@@ -419,6 +429,7 @@
 \newcommand{\tpart}[1]{%
   \cleardoublepage%
   \phantomsection%
+  \setpartmark{#1}%
   \section{#1}\label{#1}%
 }
 
