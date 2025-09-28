@@ -139,17 +139,7 @@ FakeStretch=0.95]
 \fancyhead[RO]{\rightmark}
 \fancyhead[LE]{\leftmark}
 
-\renewcommand{\chaptermark}[1]{%
-  \sbox{\headerbox}{\small\modifiedxh#1}%
-  \ifdim\wd\headerbox > 20em
-  \def\theheadermark{\truncate[……]{20em}{\small\modifiedxh#1}}%
-  \else
-  \def\theheadermark{\small\modifiedxh#1}%
-  \fi
-  \markboth{\theheadermark}{}%
-}
-
-\renewcommand{\sectionmark}[1]{%
+\renewcommand{\subsectionmark}[1]{%
   \sbox{\headerbox}{\small\modifiedxh#1}%
   \ifdim\wd\headerbox > 20em
   \def\theheadermark{\truncate[……]{20em}{\small\modifiedxh#1}}%
@@ -198,7 +188,7 @@ FakeStretch=0.95]
 
 % --------------------------------------
 
-\input{../cover}
+\input{tests/cover}
 
 % --------------------------------------
 
@@ -246,7 +236,7 @@ Baskerville Book}[Path=fonts/]\thepage}}
 
 % --------------------------------------
 
-\input{../content}
+\input{tests/content}
 
 % --------------------------------------
 
@@ -263,9 +253,9 @@ Baskerville Book}[Path=fonts/]\thepage}}
 
 % --------------------------------------
 
-\input{../appendix}
+\input{tests/appendix}
 
-\input{../afterword}
+\input{tests/afterword}
 
 % --------------------------------------
 
