@@ -20,6 +20,22 @@
 }
 
 % --------------------------------------
+% cover
+% --------------------------------------
+
+\newcommand{\makecover}[1]{%
+  \clearpage%
+  \AddToShipoutPictureBG*{%
+    \AtPageLowerLeft{%
+      \includegraphics[width=\paperwidth,height=\paperheight]{#1}%
+    }%
+  }%
+  \null%
+  \thispagestyle{empty}%
+  \clearpage%
+}
+
+% --------------------------------------
 % intro
 % --------------------------------------
 
