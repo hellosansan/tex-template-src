@@ -27,8 +27,8 @@
 \usepackage{fontspec}
 \usepackage{geometry}
 \usepackage{graphicx}
-\usepackage[hidelinks,bookmarksnumbered=true,hyperfootnotes=true]{hyperref}
-\usepackage{bookmark}
+% \usepackage[hidelinks,bookmarksnumbered=true,hyperfootnotes=true]{hyperref}
+% \usepackage{bookmark}
 \usepackage{lipsum}
 \usepackage{pdfpages}
 \usepackage{perpage}
@@ -182,15 +182,20 @@ FakeStretch=0.95]
 \input{other_cmd}
 \input{appendix_cmd}
 
+\usepackage[hidelinks,bookmarksnumbered=true,hyperfootnotes=true]{hyperref}
+\usepackage{bookmark}
+
 % ------------------------------------------------------------------------------
 % 正文
 % ------------------------------------------------------------------------------
 
 \begin{document}
 
+\frontmatter
+
 % --------------------------------------
 
-\input{../cover}
+\input{tests/cover}
 
 % --------------------------------------
 
@@ -198,7 +203,9 @@ FakeStretch=0.95]
 0.000\baselineskip}}
 \setlength{\parskip}{0bp}
 
-\clearpage
+% \clearpage
+\pagenumbering{roman}
+
 \fancyhf{}
 \renewcommand{\headrulewidth}{0bp}
 
@@ -207,11 +214,14 @@ FakeStretch=0.95]
 \fancyfoot[RO]{%
   \makebox[0pt][l]{%
     \hspace{3.5bp}%
-    \fontspec{Berthold Baskerville Book}[Path=fonts/]\thepage
+    \fontspec{Berthold Baskerville Book}[Path=fonts/]\number\value{page}%
   }%
 }
-\fancyfoot[LE]{\hspace{-4.5bp}\makebox[0pt][r]{\fontspec{Berthold
-Baskerville Book}[Path=fonts/]\thepage}}
+\fancyfoot[LE]{%
+  \hspace{-4.5bp}\makebox[0pt][r]{%
+    \fontspec{Berthold Baskerville Book}[Path=fonts/]\number\value{page}%
+  }%
+}
 \pagestyle{fancy}
 
 \tableofcontents
@@ -219,6 +229,7 @@ Baskerville Book}[Path=fonts/]\thepage}}
 \mainmatter
 
 \clearpage
+
 \fancyhf{}
 \renewcommand{\headrulewidth}{0bp}
 
@@ -227,18 +238,21 @@ Baskerville Book}[Path=fonts/]\thepage}}
 \fancyfoot[RO]{%
   \makebox[0pt][l]{%
     \hspace{3.5bp}%
-    \fontspec{Berthold Baskerville Book}[Path=fonts/]\thepage
+    \fontspec{Berthold Baskerville Book}[Path=fonts/]\thepage%
   }%
 }
-\fancyfoot[LE]{\hspace{-4.5bp}\makebox[0pt][r]{\fontspec{Berthold
-Baskerville Book}[Path=fonts/]\thepage}}
+\fancyfoot[LE]{%
+  \hspace{-4.5bp}\makebox[0pt][r]{%
+    \fontspec{Berthold Baskerville Book}[Path=fonts/]\thepage%
+  }%
+}
 \pagestyle{fancy}
 
 \markboth{}{}
 
 % --------------------------------------
 
-\input{../content}
+\input{tests/content}
 
 % --------------------------------------
 
@@ -255,9 +269,9 @@ Baskerville Book}[Path=fonts/]\thepage}}
 
 % --------------------------------------
 
-\input{../appendix}
+\input{tests/appendix}
 
-\input{../afterword}
+\input{tests/afterword}
 
 % --------------------------------------
 
