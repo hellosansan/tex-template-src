@@ -140,6 +140,22 @@
   \par\vspace{\dimexpr\baselineskip - 1.8em\relax}%
 }
 
+\NewDocumentCommand{\imgw}{O{1} m O{}}{%
+  \par\vspace{\dimexpr\baselineskip - 1em\relax}%
+  \noindent%
+  \makebox[\textwidth][c]{%
+    \includegraphics[width=#1\textwidth]{#2}%
+  }%
+  \IfValueT{#3}{%
+    \par\vspace{-0.5em}%
+    {\begin{center}
+      \CJKfamily{ss}%
+      \fontsize{9.0bp}{9.5bp}\selectfont
+      \parbox{0.8\textwidth}{\centering #3}
+    \end{center}}%
+  }%
+  \par\vspace{\dimexpr\baselineskip - 1.8em\relax}%
+}
 
 % tbl
 % 在当前位置插入一张表格（标题在上）
@@ -151,6 +167,23 @@
       \CJKfamily{ss}%
       \fontsize{9.0bp}{9.5bp}\selectfont
       \parbox{0.8\dimexpr#1\textwidth\relax}{\centering #3}
+    \end{center}}%
+    \par\vspace{-0.5em}%
+  }%
+  \noindent%
+  \makebox[\textwidth][c]{%
+    \includegraphics[width=#1\textwidth]{#2}%
+  }%
+  \par\vspace{\dimexpr\baselineskip - 1.8em\relax}%
+}
+
+\NewDocumentCommand{\tblw}{O{1} m O{}}{%
+  \par\vspace{\dimexpr\baselineskip - 1em\relax}%
+  \IfValueT{#3}{%
+    {\begin{center}
+      \CJKfamily{ss}%
+      \fontsize{9.0bp}{9.5bp}\selectfont
+      \parbox{0.8\textwidth}{\centering #3}
     \end{center}}%
     \par\vspace{-0.5em}%
   }%
