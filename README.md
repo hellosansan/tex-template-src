@@ -16,7 +16,7 @@
 \tpart{title}               -> 篇       (可选)
 
 \tchapter{title}            -> 章
-\tchapter(nonum){title}     -> 无编号章
+\tchapternonum{title}       -> 无编号章
 
 \tsection{title}            -> 节       1.
 \tsectionnonum{title}       -> 无编号节 1.
@@ -28,14 +28,22 @@
 \tsubsubsectionnonum{title} -> 无编号小节 (1)
 ```
 
+### 注释级别
+
+```tex
+\nauthor{comment} -> 作者添加的注释
+\neditor{comment} -> 编辑 / 译者添加的注释
+\nend{comment}    -> 尾注
+```
+
 ### 段落级别
 
-```
+```tex
 
 ```
 
 ### 字符级别
 
-```
+```tex
 
 ```
