@@ -24,6 +24,8 @@
   -> 章
 \tchapternonum{标题}
   -> 无编号章
+\tvicechapter{副标题}
+  -> 章的副标题
 
 \tsection{标题}
   -> 节 1.
