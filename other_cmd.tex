@@ -16,6 +16,23 @@
   \CJKunderdot{#1}%
 }
 
+% lcr
+
+\NewDocumentCommand{\lcr}{O{l} m}{%
+  {%
+    \ifthenelse{\equal{#1}{c}}{%
+      \centering
+    }{%
+      \ifthenelse{\equal{#1}{r}}{%
+        \raggedleft
+      }{%
+        \raggedright
+      }%
+    }%
+    #2\par
+  }%
+}
+
 % hr
 % 添加一条水平分割线
 % TODO: 在 \quo 前后会产生不同的上下空白
