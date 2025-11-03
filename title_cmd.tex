@@ -468,10 +468,34 @@
 \newcommand{\tchapternonum}[1]{%
   \clearpage%
   \phantomsection%
+  {%
+    \sbox{\headerbox}{\small\modifiedxh#1}%
+    \ifdim\wd\headerbox > 20em
+      \def\theheadermark{\truncate[……]{20em}{\small\modifiedxh#1}}%
+    \else
+      \def\theheadermark{\small\modifiedxh#1}%
+    \fi
+    \markboth{\theheadermark}{\theheadermark}%
+  }%
   \subsection*{#1}\label{#1}%
   \addcontentsline{toc}{subsection}{#1}%
-  \chaptermark{#1}%
 }
+
+% \newcommand{\tchapternonum}[1]{%
+%   \clearpage%
+%   \phantomsection%
+%   \subsection*{#1}\label{#1}%
+%   \addcontentsline{toc}{subsection}{#1}%
+%   {%
+%     \sbox{\headerbox}{\small\modifiedxh#1}%
+%     \ifdim\wd\headerbox > 20em
+%       \def\theheadermark{\truncate[……]{20em}{\small\modifiedxh#1}}%
+%     \else
+%       \def\theheadermark{\small\modifiedxh#1}%
+%     \fi
+%     \markboth{\theheadermark}{\theheadermark}%
+%   }%
+% }
 
 % 为 chapter 添加副标题
 \newcommand{\tvicechapter}[1]{%

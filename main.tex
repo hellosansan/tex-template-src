@@ -148,6 +148,16 @@ FakeStretch=0.95]
   \else
   \def\theheadermark{\small\modifiedxh#1}%
   \fi
+  \markboth{\theheadermark}{\theheadermark}%
+}
+
+\renewcommand{\subsubsectionmark}[1]{%
+  \sbox{\headerbox}{\small\modifiedxh#1}%
+  \ifdim\wd\headerbox > 20em
+  \def\theheadermark{\truncate[……]{20em}{\small\modifiedxh#1}}%
+  \else
+  \def\theheadermark{\small\modifiedxh#1}%
+  \fi
   \markright{\theheadermark}%
 }
 
