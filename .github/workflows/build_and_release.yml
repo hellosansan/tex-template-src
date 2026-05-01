@@ -15,8 +15,8 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Replace "../" with "debug/" in main.tex
-        run: sed -i 's|\.\./|tests/|g' main.tex
+      # - name: Replace "../" with "debug/" in main.tex
+      #   run: sed -i 's|\.\./|tests/|g' main.tex
 
       - name: Compile LaTeX document with xelatex
         uses: xu-cheng/latex-action@v3
